@@ -18,14 +18,14 @@ include <stdio.h>
 #define ACTION_REST  0
 #define ACTION_PROVOKE  1
 #define ACTION_PULL  2
-
+//인트로
 void print_banner() {
     printf("---------------------\n");
     printf("|      부산헹       |\n");
     printf("---------------------\n");
     printf("   ()     ()     ()   \n");
 }
-
+//마동석 스테미너
 int get_madongseok_stamina() {
     int madongseok_stamina;
     while (1) {
@@ -36,7 +36,7 @@ int get_madongseok_stamina() {
     }
     return madongseok_stamina;
 }
-
+//열차 길이
 int get_train_length() {
     int train_length;
     while (1) {
@@ -47,7 +47,7 @@ int get_train_length() {
     }
     return train_length;
 }
-
+//확률
 int get_probability() {
     int probability;
     while (1) {
@@ -58,7 +58,7 @@ int get_probability() {
     }
     return probability;
 }
-
+//열차 초기상태 출력
 void print_train(int train_length) {
     for (int i = 0; i < train_length; i++) {
         printf("#");
@@ -84,7 +84,7 @@ void print_train_with_chars(int train_length, int cpos, int zpos, int mpos) {
     }
     printf("#\n");
 }
-
+//시민과 좀비의 이동 상태 출력
 void print_move_status(int train_length, int c_move, int* cpos, int* zpos, int* mpos, int* aggro_c, int* aggro_m, int iter, int probability, int* zombie_pulled, int* cprev, int* mprev, int* zprev, int* aggro_c_prev, int* aggro_m_prev) {
     if (c_move < (100 - probability) && *cpos > 1) {
         if (*aggro_c_prev == AGGRO_MAX && *aggro_c == AGGRO_MAX) {
@@ -122,7 +122,7 @@ void print_move_status(int train_length, int c_move, int* cpos, int* zpos, int* 
     }
     *zombie_pulled = 0;
 }
-
+//이동 단계
 void move_phase(int train_length, int* cpos, int* zpos, int* mpos, int* aggro_c, int* aggro_m, int iter, int probability, int* zombie_pulled, int* cprev, int* mprev, int* zprev, int* aggro_c_prev, int* aggro_m_prev, int c_move, int* stamina) {
    
     *cprev = *cpos;
@@ -213,7 +213,7 @@ void move_phase(int train_length, int* cpos, int* zpos, int* mpos, int* aggro_c,
         printf("madongseok : %d -> %d (aggro : %d -> %d, stamina : %d)\n", *mprev, *mpos, *aggro_m_prev, *aggro_m, *stamina);
     }
 }
-
+//시민과 좀비의 행동 출력
 void print_action_status(int* cpos, int* stamina,int* aggro_c, int* aggro_m, int* zpos, int* mpos) {
     if (*cpos == 1) {
         printf("YOU WIN! Citizen(s) escaped to the next train\n");
@@ -255,7 +255,7 @@ void print_action_status(int* cpos, int* stamina,int* aggro_c, int* aggro_m, int
 }
 
 
-
+//행동 단계
 void action_phase(int train_length, int* cpos, int* zpos, int* mpos, int* aggro_c, int* aggro_m, int* stamina, int probability, int* zombie_pulled, int* aggro_m_prev, int* sta_prev) {
 
     if (*zpos == *cpos + 1 && *zpos == *mpos + 1) { 
@@ -332,7 +332,7 @@ void action_phase(int train_length, int* cpos, int* zpos, int* mpos, int* aggro_
         }
     }
 }
-
+//게임의 진행을 함수의 나열로 만듦
 void game_loop(int train_length, int madongseok_stamina, int probability) {
     int iter = 1;
     int cpos = train_length - 6;
@@ -361,7 +361,7 @@ void game_loop(int train_length, int madongseok_stamina, int probability) {
         iter++;
     }
 }
-
+//메인 함수
 int main(void) {
     srand(time(NULL));
 
